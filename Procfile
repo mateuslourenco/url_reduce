@@ -1,2 +1,2 @@
 release: python manage.py migrate --noinput
-web: gunicorn quiz.wsgi --log-file -
+web: gunicorn devpro.wsgi --log-file -
