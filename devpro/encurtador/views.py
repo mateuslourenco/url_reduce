@@ -53,5 +53,3 @@ def home(request):
             return render(request, 'encurtador/home.html', context=ctx)
     else:
         return render(request, 'encurtador/home.html')
-
-
