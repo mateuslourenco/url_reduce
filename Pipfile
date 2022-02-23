@@ -12,6 +12,8 @@ dj-database-url = "*"
 psycopg2-binary = "*"
 install = "*"
 sentry-sdk = "*"
+pytest-cov = "*"
+codecov = "*"
 
 [dev-packages]
 flake8 = "*"
