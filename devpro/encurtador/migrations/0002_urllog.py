@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('encurtador', '0001_initial'),
     ]
@@ -20,7 +19,8 @@ class Migration(migrations.Migration):
                 ('user_agent', models.CharField(blank=True, max_length=512, null=True)),
                 ('host', models.CharField(blank=True, max_length=512, null=True)),
                 ('ip', models.GenericIPAddressField(blank=True, null=True)),
-                ('url_redirect', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='logs', to='encurtador.urlredirect')),
+                ('url_redirect', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, related_name='logs',
+                                                   to='encurtador.urlredirect')),
             ],
         ),
     ]
