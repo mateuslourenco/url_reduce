@@ -2,7 +2,7 @@ import pytest
 from django.urls import reverse
 from model_bakery import baker
 
-from devpro.encurtador.models import UrlRedirect
+from devpro.encurtador.models import UrlRedirect, UrlLog
 
 
 @pytest.fixture
@@ -19,3 +19,7 @@ def resp(client, url_redirect):
 def test_redirect(resp, url_redirect):
     assert resp.status_code == 302
     assert resp.url == url_redirect.destino
+
+
+def test_log_criado(resp):
+    assert UrlLog.objects.exists()
