@@ -36,3 +36,7 @@ def relatorios(request, slug):
         'total_cliques': sum(r.cliques for r in redirecionamentos_por_data)
     }
     return render(request, 'encurtador/relatorio.html', ctx)
+
+
+def home(request):
+    return render(request, 'encurtador/home.html')
