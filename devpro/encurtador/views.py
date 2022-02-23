@@ -1,7 +1,10 @@
 from django.db.models import Count
 from django.db.models.functions import TruncDate
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
+from django.urls import reverse
 
+from devpro.encurtador.forms import ReduceForm
 from devpro.encurtador.models import UrlRedirect, UrlLog
 
 
@@ -39,4 +42,16 @@ def relatorios(request, slug):
 
 
 def home(request):
-    return render(request, 'encurtador/home.html')
+    if request.method == 'POST':
+        form = ReduceForm(request.POST)
+        if form.is_valid():
+            reduce = form.save(commit=False)
+            reduce.save()
+            return HttpResponseRedirect(reverse('home'))
+        else:
+            ctx = {'form': form}
+            return render(request, 'encurtador/home.html', context=ctx)
+    else:
+        return render(request, 'encurtador/home.html')
+
+
