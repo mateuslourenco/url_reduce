@@ -19,6 +19,7 @@ from django.urls import path
 from devpro.encurtador import views
 
 urlpatterns = [
+    path('', views.home, name='home'),
     path('admin/', admin.site.urls),
     path('<slug:slug>', views.redirecionar, name='redirecionar'),
     path('relatorios/<slug:slug>', views.relatorios, name='relatorios'),
