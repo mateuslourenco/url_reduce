@@ -37,15 +37,10 @@
                     <div class="col-sm-2">
                         <button class="btn btn-lg btn-outline-primary btn-block" type="submit">Reduzir</button>
                     </div>
-                    <!--                    {% if formulario.errors %}-->
-                    <!--                    <div class="alert alert-danger mt-2 col-sm-12 input-group-lg">-->
-                    <!--                        <a href="#id_{{ error.name }}" class="error">{{ formulario.errors }}</a>-->
-                    <!--                    </div>-->
-                    <!--                    {% endif %}-->
                     {% if form.errors %}
                     {% for field in form %}
                     {% for error in field.errors %}
-                    <div class="alert alert-danger mt-2 col-sm-12 input-group-lg">
+                    <div class="alert alert-danger mt-2 ml-3 col-8">
                         <a href="#">{{ error|escape }}</a>
                     </div>
                     {% endfor %}
