@@ -1,112 +1,99 @@
+{% extends 'encurtador/base.html' %}
 {% load static %}
-<!doctype html>
-<html lang="pt-br">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta name="generator" content="">
-    <title>URL Reduce</title>
-   
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-    <!-- Bootstrap core CSS -->
-    
-    <link href="{% static 'encurtador/assets/css/style.css' %}" rel="stylesheet">
-  </head>
-  <body class="text-center">
-    <div class="container">
-      <div class="row">
+
+{% block title %}URL Reduce - Relatório{% endblock title %}
+{% block body %}
+<body class="text-center">
+<div class="container">
+    <div class="row">
         <div class="offset-sm-1 col-sm-10">
-          <h1 class="font-weight-bold">URL<span class="font-weight-light color-y">Reduce</span></h1>
-          <p class="h5 mb-5 text-muted">Encurtador de URL</p>
+            <h1 class="font-weight-bold">URL<span class="font-weight-light color-y">Reduce</span></h1>
+            <p class="h5 mb-5 text-muted">Encurtador de URL</p>
 
         </div>
-      </div>
+    </div>
 
-      <div class="row">
+    <div class="row">
         <div class="offset-sm-1 col-sm-10 text-left text-muted">
-          <p>Criado em {% now "d \d\e F \d\e Y, H:i\H" %}</p>
-          <h5>Original: <a href="{{ reduce.destino }}" class="color-y">{{ reduce.destino }}</a></h5>
+            <p>Criado em {% now "d \d\e F \d\e Y, H:i\H" %}</p>
+            <h5>Original: <a href="{{ reduce.destino }}" class="color-y">{{ reduce.destino }}</a></h5>
         </div>
-      </div>
+    </div>
 
-      <div class="row">
+    <div class="row">
         <div class="offset-sm-1 col-sm-10 text-left text-muted">
-          <h3>Reduzido: <a href="{{ url_reduzida }}" class="color-y">{{ url_reduzida }}</a></h3>
+            <h3>Reduzido: <a href="{{ url_reduzida }}" class="color-y">{{ url_reduzida }}</a></h3>
         </div>
-      </div>
+    </div>
 
-      <div class="row">
+    <div class="row">
         <div class="offset-sm-1 col-sm-10 text-left">
-          <button class="btn btn-outline-primary">COPY</button>
-          <button class="btn btn-outline-primary">SHARE</button>
+            <button class="btn btn-outline-primary">COPY</button>
+            <button class="btn btn-outline-primary">SHARE</button>
         </div>
-      </div>
+    </div>
 
-      <h2 class="font-weight-bold mt-5">Total de Cliques: <span class="color-y">{{ total_cliques }}</span></h2>
-      <p class="text-muted">Gráfico de Cliques por Dia</p> 
-      <div class="row mt-3">
+    <h2 class="font-weight-bold mt-5">Total de Cliques: <span class="color-y">{{ total_cliques }}</span></h2>
+    <p class="text-muted">Gráfico de Cliques por Dia</p>
+    <div class="row mt-3">
         <div class="offset-sm-1 col-sm-10">
 
-          <!-- Gráfico -->
-          <div class="card">
-              <canvas id="multipleBarChart"></canvas>
-          </div>
-          <!-- Gráfico -->
+            <!-- Gráfico -->
+            <div class="card">
+                <canvas id="multipleBarChart"></canvas>
+            </div>
+            <!-- Gráfico -->
 
         </div>
-      </div>
+    </div>
 
-      <div class="row">
+    <div class="row">
         <div class="offset-sm-1 col-sm-10 mt-5">
-          
+
             <!-- Tabela -->
             <div class="panel">
                 <div class="panel-heading">
                     <h3 class="panel-title font-weight-bold mb-3">Cliques por Dia</h3>
                 </div>
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th class="text-left">Data</th>
-                                        <th>Total de Clique</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {% for r in redirecionamentos_por_data %}
-                                    <tr title="QTD de Cliques em {{ r.data }}">
-                                        <td class="text-left">{{ r.data }}</td>
-                                        <td>{{ r.cliques }}</td>
-                                    </tr>
-                                {% endfor %}
-                            </table>
-                        </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th class="text-left">Data</th>
+                                <th>Total de Clique</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for r in redirecionamentos_por_data %}
+                            <tr title="QTD de Cliques em {{ r.data }}">
+                                <td class="text-left">{{ r.data }}</td>
+                                <td>{{ r.cliques }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
                     </div>
+                </div>
             </div>
             <!-- Tabela -->
 
         </div>
     </div>
 
-      <p class="mt-5 text-muted"><span class="color-y">&copy;</span> 2021 - Jornada Rumo a Primeira Vaga | URL<span class="color-y">Reduce</span></p>
-      <br />
-    </div>
-    
-    <!-- Bootstrap core JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Bootstrap core JS -->
-    
-    <!-- Lib Chart JS -->
-    <script src="{% static 'encurtador/assets/js/chart.js/chart.min.js' %}"></script>
-    <!-- Lib Chart JS -->
-    
-    <!-- Gráfico -->
-    <script>
+    <p class="mt-5 text-muted"><span class="color-y">&copy;</span> 2021 - Jornada Rumo a Primeira Vaga | URL<span
+            class="color-y">Reduce</span></p>
+    <br/>
+</div>
+
+{% include 'encurtador/bootstrap.html' %}
+
+
+<!-- Lib Chart JS -->
+<script src="{% static 'encurtador/assets/js/chart.js/chart.min.js' %}"></script>
+<!-- Lib Chart JS -->
+
+<!-- Gráfico -->
+<script>
       let multipleBarChart = document.getElementById('multipleBarChart').getContext('2d')
 
       let myMultipleBarChart = new Chart(multipleBarChart, {
@@ -164,7 +151,8 @@
               }
           }
       });
-    </script>
-    <!-- Gráfico -->
-  </body>
-</html>
+
+</script>
+<!-- Gráfico -->
+</body>
+{% endblock body %}
