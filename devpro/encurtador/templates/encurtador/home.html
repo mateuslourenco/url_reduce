@@ -10,7 +10,6 @@
         <div class="offset-sm-1 col-sm-10">
             <h1 class="font-weight-bold">URL<span class="font-weight-light color-y">Reduce</span></h1>
             <p class="h5 mb-5 text-muted">Encurtador de URL</p>
-
             <form action="{% url 'home' %}" method="post">
                 {% csrf_token %}
                 <div class="row">
@@ -37,10 +36,37 @@
                 </div>
 
             </form>
-
+            <!-- Tabela -->
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title font-weight-bold mb-3">Encurtadores criados</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th class="text-left">Url reduzida</th>
+                                <th>Url original</th>
+                                <th>Relatório</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for r in redirecionamentos %}
+                            <tr>
+                                <td class="text-left"><a href="{{ r.localizar_url_reduzida }}"> {{r.slug}} </a></td>
+                                <td>{{ r.destino }}</td>
+                                <td><a href="{{ r.localizar_relatorio }}"> Relatório </a></td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Tabela -->
         </div>
     </div>
-
     <p class="mt-5 mb-3 text-muted"><span class="color-y">&copy;</span> 2021 - Jornada Rumo a Primeira Vaga | URL<span
             class="color-y">Reduce</span></p>
 </div>

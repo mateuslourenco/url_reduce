@@ -1,17 +1,28 @@
 import pytest
 from django.urls import reverse
+from model_bakery import baker
 
 from devpro.django_assertions import assert_contains
 from devpro.encurtador.models import UrlRedirect
 
 
 @pytest.fixture
-def resp(client):
+def redirects(db):
+    return baker.make(UrlRedirect, 2)
+
+
+@pytest.fixture
+def resp(client, redirects):
     return client.get(reverse('home'))
 
 
 def test_status_code(resp):
     assert resp.status_code == 200
+
+
+def test_listar_redirects(resp, redirects):
+    for redirect in redirects:
+        assert_contains(resp, redirect.slug)
 
 
 @pytest.fixture
@@ -30,7 +41,7 @@ def test_redirect_existe_no_db(resp_post):
 
 @pytest.fixture
 def redirect_criado(db):
-    return UrlRedirect.objects.create(destino='teste.teste', slug='teste')
+    return baker.make(UrlRedirect)
 
 
 @pytest.fixture
