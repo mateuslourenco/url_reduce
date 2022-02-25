@@ -63,8 +63,52 @@
                         </table>
                     </div>
                 </div>
+                <!-- Paginator -->
+                <nav aria-label="...">
+                    <ul class="pagination">
+                        <!-- Pagina anterior -->
+                        {% if redirecionamentos.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="{% url 'home' %}?page={{ redirecionamentos.previous_page_number }}">Anterior</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link">Anterior</a>
+                        </li>
+                        {% endif %}
+                        <!-- Fim pagina anterior-->
+
+                        <!-- Listar todas as paginas -->
+                        {% for num in redirecionamentos.paginator.page_range %}
+                        {% if num == redirecionamentos.number %}
+                        <li class="page-item active">
+                            <a class="page-link" href="{% url 'home' %}?page={{ num }}">{{ num }}</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item " aria-current="page">
+                            <a class="page-link" href="{% url 'home' %}?page={{ num }}">{{ num }}</a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                        <!-- Fim listar todas as paginas -->
+
+                        <!-- Proxima pagina -->
+                        {% if redirecionamentos.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="{% url 'home' %}?page={{ redirecionamentos.next_page_number }}">Próxima</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">Próxima</a>
+                        </li>
+                        {% endif %}
+                        <!-- Fim proxima pagina -->
+                    </ul>
+                </nav>
+                <!-- Fim Paginator -->
             </div>
-            <!-- Tabela -->
+            <!-- Fim Tabela -->
+
         </div>
     </div>
     <p class="mt-5 mb-3 text-muted"><span class="color-y">&copy;</span> 2021 - Jornada Rumo a Primeira Vaga | URL<span
