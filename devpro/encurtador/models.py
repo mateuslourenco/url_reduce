@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class UrlRedirect(models.Model):
@@ -9,6 +10,15 @@ class UrlRedirect(models.Model):
 
     def __str__(self):
         return f'url redirect para {self.destino}'
+
+    class Meta:
+        ordering = ('-id',)
+
+    def localizar_url_reduzida(self):
+        return reverse('redirecionar', kwargs={'slug': self.slug})
+
+    def localizar_relatorio(self):
+        return reverse('relatorios', kwargs={'slug': self.slug})
 
 
 class UrlLog(models.Model):
