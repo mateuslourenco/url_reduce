@@ -1,9 +1,8 @@
-from django.db.models import Count
-from django.db.models.functions import TruncDate
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
 
+from devpro.encurtador.facade import localizar_url_redirect, localizar_redirecionamentos
 from devpro.encurtador.forms import ReduceForm
 from devpro.encurtador.models import UrlRedirect, UrlLog
 
@@ -21,19 +20,11 @@ def redirecionar(request, slug):
 
 
 def relatorios(request, slug):
-    url_redirect = UrlRedirect.objects.get(slug=slug)
+    url = localizar_url_redirect(slug)
     url_reduzida = request.build_absolute_uri(f'/{slug}')
-    redirecionamentos_por_data = list(
-        UrlRedirect.objects.filter(
-            slug=slug
-        ).annotate(
-            data=TruncDate('logs__criado_em')
-        ).annotate(
-            cliques=Count('data')
-        ).order_by('data')
-    )
+    redirecionamentos_por_data = localizar_redirecionamentos(slug)
     ctx = {
-        'reduce': url_redirect,
+        'reduce': url,
         'url_reduzida': url_reduzida,
         'redirecionamentos_por_data': redirecionamentos_por_data,
         'total_cliques': sum(r.cliques for r in redirecionamentos_por_data)
