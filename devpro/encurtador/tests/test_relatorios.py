@@ -27,3 +27,13 @@ def test_url_original_presente(resp, url_redirect):
 
 def test_url_reduzida_presente(resp, url_redirect):
     assert_contains(resp, f'/{url_redirect.slug}')
+
+
+@pytest.fixture
+def resp_slug_invalido(client, url_redirect):
+    return client.get(reverse('relatorios', kwargs={'slug': url_redirect.slug + '1'}))
+
+
+def test_url_relatorio_invalido(resp_slug_invalido):
+    assert resp_slug_invalido.status_code == 302
+    assert resp_slug_invalido.url == reverse('home')
