@@ -22,13 +22,13 @@
                         <input type="text" id="inputSlug" class="form-control mt-1" placeholder="Informe o slug..."
                                required autofocus name="slug">
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-2 mb-2">
                         <button class="btn btn-lg btn-outline-primary btn-block" type="submit">Reduzir</button>
                     </div>
                     {% if form.errors %}
                     {% for field in form %}
                     {% for error in field.errors %}
-                    <div class="alert alert-danger mt-2 ml-3 col-8">
+                    <div class="alert alert-danger ml-3 col-8">
                         <a href="#">{{ error|escape }}</a>
                     </div>
                     {% endfor %}

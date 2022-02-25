@@ -47,7 +47,7 @@ def home(request):
         if form.is_valid():
             reduce = form.save(commit=False)
             reduce.save()
-            return HttpResponseRedirect(reverse('home'))
+            return HttpResponseRedirect(reverse('relatorios', kwargs={'slug': request.POST['slug']}))
         else:
             ctx = {'form': form}
             return render(request, 'encurtador/home.html', context=ctx)
