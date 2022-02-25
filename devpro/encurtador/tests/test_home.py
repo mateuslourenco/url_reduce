@@ -19,6 +19,11 @@ def resp_post(client, db):
     return client.post(reverse('home'), data={'destino': 'teste.teste', 'slug': 'teste'})
 
 
+def test_status_code_post(resp_post):
+    assert resp_post.status_code == 302
+    assert resp_post.url == reverse('relatorios', kwargs={'slug': 'teste'})
+
+
 def test_redirect_existe_no_db(resp_post):
     assert UrlRedirect.objects.exists()
 
