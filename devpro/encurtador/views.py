@@ -26,16 +26,20 @@ def redirecionar(request, slug):
 
 
 def relatorios(request, slug):
-    url = localizar_url_redirect(slug)
-    url_reduzida = localizar_url_reduzida(request, slug)
-    redirecionamentos_por_data = localizar_redirecionamentos_por_data(slug)
-    ctx = {
-        'reduce': url,
-        'url_reduzida': url_reduzida,
-        'redirecionamentos_por_data': redirecionamentos_por_data,
-        'total_cliques': sum(r.cliques for r in redirecionamentos_por_data)
-    }
-    return render(request, 'encurtador/relatorio.html', ctx)
+    try:
+        url = localizar_url_redirect(slug)
+    except ObjectDoesNotExist:
+        return HttpResponseRedirect(reverse('home'))
+    else:
+        url_reduzida = localizar_url_reduzida(request, slug)
+        redirecionamentos_por_data = localizar_redirecionamentos_por_data(slug)
+        ctx = {
+            'reduce': url,
+            'url_reduzida': url_reduzida,
+            'redirecionamentos_por_data': redirecionamentos_por_data,
+            'total_cliques': sum(r.cliques for r in redirecionamentos_por_data)
+        }
+        return render(request, 'encurtador/relatorio.html', ctx)
 
 
 def home(request):

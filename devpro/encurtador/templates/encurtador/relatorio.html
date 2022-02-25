@@ -28,8 +28,7 @@
 
     <div class="row">
         <div class="offset-sm-1 col-sm-10 text-left">
-            <button class="btn btn-outline-primary">COPY</button>
-            <button class="btn btn-outline-primary">SHARE</button>
+            <button onclick="copy('{{ url_reduzida }}')" class="btn btn-outline-primary">COPY</button>
             <button class="btn btn-outline-primary">
                 <a type="button" href="{% url 'home' %}">INICIO</a>
             </button>
@@ -159,4 +158,10 @@
 </script>
 <!-- Gráfico -->
 </body>
+
+<!-- Copy -->
+<script>
+function copy(url) { navigator.clipboard.writeText(url); }
+</script>
+<!-- Copy -->
 {% endblock body %}
