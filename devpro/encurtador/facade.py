@@ -4,7 +4,7 @@ from django.db.models.functions import TruncDate
 from devpro.encurtador.models import UrlRedirect
 
 
-def localizar_url_redirect(slug):
+def localizar_url_redirect(slug: str) -> UrlRedirect:
     return UrlRedirect.objects.get(slug=slug)
 
 
