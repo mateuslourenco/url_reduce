@@ -25,6 +25,14 @@ def test_listar_redirects(resp, redirects):
         assert_contains(resp, redirect.slug)
 
 
+def test_pagina_anterior_presente(resp):
+    assert_contains(resp, 'Anterior')
+
+
+def test_proxima_pagina_presente(resp):
+    assert_contains(resp, 'Próxima')
+
+
 @pytest.fixture
 def resp_post(client, db):
     return client.post(reverse('home'), data={'destino': 'teste.teste', 'slug': 'teste'})

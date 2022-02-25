@@ -1,4 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -49,8 +50,19 @@ def home(request):
             ctx = {'form': form}
             return render(request, 'encurtador/home.html', context=ctx)
     else:
+
+        parametro_pagina = request.GET.get('page', '1')
+        parametro_limite = '5'
+
         redirecionamentos = localizar_redirects()
+        redirecionamentos_paginator = Paginator(redirecionamentos, parametro_limite)
+
+        try:
+            page = redirecionamentos_paginator.page(parametro_pagina)
+        except (EmptyPage, PageNotAnInteger):
+            page = redirecionamentos_paginator.page(1)
+
         ctx = {
-            'redirecionamentos': redirecionamentos
+            'redirecionamentos': page
         }
         return render(request, 'encurtador/home.html', ctx)
