@@ -15,6 +15,8 @@ h1, h2, .text-muted { color: #fff !important;}
 .color-y:hover{color: #FFC203; text-decoration: none;}
 .input-group-lg>.form-control:not(textarea) {height: calc(1.5em + 1rem + 30px);}
 .btn-outline-primary{border-color: #fff; color:#fff;}
+.btn-outline-primary a{color:#fff;}
+.btn-outline-primary a:hover{text-decoration:none;}
 .btn-lg {padding: 1.5rem 1rem;}
 .panel {background-color: #fff; padding: 20px; border-radius: 4px;}
 th,td {color:#888;}
