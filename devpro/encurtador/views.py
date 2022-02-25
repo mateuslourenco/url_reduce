@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse
@@ -9,15 +10,19 @@ from devpro.encurtador.models import UrlRedirect, UrlLog
 
 
 def redirecionar(request, slug):
-    url_redirect = UrlRedirect.objects.get(slug=slug)
-    UrlLog.objects.create(
-        origem=request.META.get('HTTP_REFERER'),
-        user_agent=request.META.get('HTTP_USER_AGENT'),
-        host=request.META.get('HTTP_HOST'),
-        ip=request.META.get('REMOTE_ADDR'),
-        url_redirect=url_redirect
-    )
-    return redirect(url_redirect.destino)
+    try:
+        url_redirect = UrlRedirect.objects.get(slug=slug)
+    except ObjectDoesNotExist:
+        return redirect(reverse('home'))
+    else:
+        UrlLog.objects.create(
+            origem=request.META.get('HTTP_REFERER'),
+            user_agent=request.META.get('HTTP_USER_AGENT'),
+            host=request.META.get('HTTP_HOST'),
+            ip=request.META.get('REMOTE_ADDR'),
+            url_redirect=url_redirect
+        )
+        return redirect(url_redirect.destino)
 
 
 def relatorios(request, slug):
