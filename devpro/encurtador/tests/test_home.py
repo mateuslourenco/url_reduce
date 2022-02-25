@@ -59,3 +59,12 @@ def resp_post_com_redirect_ja_existente(client, redirect_criado):
 
 def test_redirect_ja_existente(resp_post_com_redirect_ja_existente):
     assert_contains(resp_post_com_redirect_ja_existente, 'Url redirect com este Slug já existe.')
+
+
+@pytest.fixture
+def resp_paginator_invalido(client, db):
+    return client.get(reverse('home') + '?page=100')
+
+
+def test_paginator_invalido(resp_paginator_invalido):
+    assert resp_paginator_invalido.status_code == 200
