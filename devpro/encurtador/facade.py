@@ -5,7 +5,7 @@ from devpro.encurtador.models import UrlRedirect
 
 
 def localizar_url_redirect(slug: str) -> UrlRedirect:
-    return UrlRedirect.objects.get(slug=slug).order_by('-id')
+    return UrlRedirect.objects.get(slug=slug)
 
 
 def localizar_redirecionamentos_por_data(slug):
