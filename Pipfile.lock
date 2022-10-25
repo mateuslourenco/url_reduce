@@ -246,12 +246,8 @@
             "version": "==3.0.7"
         },
         "pytest": {
-            "hashes": [
-                "sha256:9ce3ff477af913ecf6321fe337b93a2c0dcf2a0a1439c43f5452112c1e4280db",
-                "sha256:e30905a0c131d3d94b89624a1cc5afec3e0ba2fbdb151867d8e0ebd49850f171"
-            ],
-            "markers": "python_version >= '3.6'",
-            "version": "==7.0.1"
+            "hashes": [],
+            "version": "==7.2.0"
         },
         "pytest-cov": {
             "hashes": [
@@ -429,12 +425,8 @@
             "version": "==3.0.7"
         },
         "pytest": {
-            "hashes": [
-                "sha256:9ce3ff477af913ecf6321fe337b93a2c0dcf2a0a1439c43f5452112c1e4280db",
-                "sha256:e30905a0c131d3d94b89624a1cc5afec3e0ba2fbdb151867d8e0ebd49850f171"
-            ],
-            "markers": "python_version >= '3.6'",
-            "version": "==7.0.1"
+            "hashes": [],
+            "version": "==7.2.0"
         },
         "pytest-django": {
             "hashes": [
